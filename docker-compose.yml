@@ -1,0 +1,14 @@
+version: "3"
+services:
+  app:
+    container_name: react-native-news
+    build:
+      context: .
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./src:/app
+    environment:
+      - WATCHPACK_POLLING=true
+    # command: bash -c "yarn dev"
+    # tty: true
