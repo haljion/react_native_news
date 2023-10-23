@@ -1,20 +1,49 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { FontAwesome } from '@expo/vector-icons'
+
+import { HomeScreen } from './screens/HomeScreen'
+import { ArticleScreen } from './screens/ArticleScreen'
+import { ClipScreen } from './screens/ClipScreen'
+
+const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
+
+const HomeStack = () => {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Article" component={ArticleScreen} />
+    </Stack.Navigator>
+  )
+}
+
+const screensOptions = ({ route }: any) => ({
+  tabBarIcon: ({ focused, color, size }: any) => {
+    if (route.name === 'HomeTab') {
+      return <FontAwesome name="home" size={size} color={color} />
+    } else if (route.name === 'ClipTab') {
+      return <FontAwesome name="bookmark" size={size} color={color} />
+    }
+  },
+})
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={screensOptions}>
+        <Tab.Screen
+          name="HomeTab"
+          component={HomeStack}
+          options={{ headerShown: false, title: 'Home' }}
+        />
+        <Tab.Screen
+          name="ClipTab"
+          component={ClipScreen}
+          options={{ headerShown: false, title: 'Clip' }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
