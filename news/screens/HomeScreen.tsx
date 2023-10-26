@@ -1,28 +1,36 @@
-import { FlatList, SafeAreaView, StyleSheet } from 'react-native'
-import { ListItem } from '../components/ListItem'
-
 import { useState, useEffect } from 'react'
+import { FlatList, SafeAreaView, StyleSheet } from 'react-native'
 import Constants from 'expo-constants'
+
 import axios from 'axios'
 
-type Aritcle = { author: string; title: string; urlToImage: string; publishedAt: string }
+import { Article } from '../types/article'
+import { ListItem } from '../components/ListItem'
 
 // Constants.manifest は現行バージョンで非推奨。Constants.expoConfig? を使用する
-const URL = `https://newsapi.org/v2/everything?q=tesla&from=2023-09-23&sortBy=publishedAt&apiKey=${Constants.expoConfig?.extra.newsApiKey}`
+const URL = `https://newsapi.org/v2/everything?q=tesla&from=2023-09-26&sortBy=publishedAt&apiKey=${Constants?.expoConfig?.extra?.newsApiKey}`
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, //　余白全体を使う
+    backgroundColor: '#eee',
+  },
+})
 
 export const HomeScreen = ({ navigation }: any) => {
-  const [articles, setArticles] = useState<Aritcle[]>([])
+  const [articles, setArticles] = useState<Article[]>([])
 
   const fetchArticles = async () => {
     try {
       const response = await axios.get(URL)
-      console.log(response.data.articles)
+      console.log('fetchArticles success.')
       setArticles(response.data.articles)
     } catch (error) {
       console.error(error)
     }
   }
 
+  // 初期表示処理
   useEffect(() => {
     fetchArticles()
   }, [])
@@ -46,10 +54,3 @@ export const HomeScreen = ({ navigation }: any) => {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, //　余白全体を使う
-    backgroundColor: '#eee',
-  },
-})

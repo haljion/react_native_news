@@ -7,6 +7,20 @@ import {
   GestureResponderEvent,
 } from 'react-native'
 
+const styles = StyleSheet.create({
+  itemContainer: {
+    height: 100,
+    width: '100%',
+    flexDirection: 'row', //コンテンツの並び順
+    backgroundColor: '#fff',
+    marginVertical: 5,
+  },
+  leftContainer: { width: 100 },
+  rightContainer: { flex: 1, padding: 10, justifyContent: 'space-between' },
+  text: { fontSize: 16 },
+  subText: { fontSize: 12, color: 'gray' },
+})
+
 /**
  * @param {
  * imageUrl: 画像URL(string)
@@ -43,17 +57,3 @@ export const ListItem = (props: {
     </TouchableOpacity>
   )
 }
-
-const styles = StyleSheet.create({
-  itemContainer: {
-    height: 100,
-    width: '100%',
-    flexDirection: 'row', //コンテンツの並び順
-    backgroundColor: '#fff',
-    marginVertical: 5,
-  },
-  leftContainer: { width: 100 },
-  rightContainer: { flex: 1, padding: 10, justifyContent: 'space-between' },
-  text: { fontSize: 16 },
-  subText: { fontSize: 12, color: 'gray' },
-})

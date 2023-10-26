@@ -1,18 +1,9 @@
 import { FlatList, SafeAreaView, StyleSheet } from 'react-native'
+
+import { useSelector } from 'react-redux'
+
+import { State } from '../types/state'
 import { ListItem } from '../components/ListItem'
-
-import { useState, useEffect } from 'react'
-import Constants from 'expo-constants'
-import { Text } from 'react-native'
-import { WebView } from 'react-native-webview'
-
-export const ClipScreen = () => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>aaa</Text>
-    </SafeAreaView>
-  )
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -20,3 +11,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
   },
 })
+
+export const ClipScreen = ({ navigation }: any) => {
+  const clips = useSelector((state: State) => {
+    return state.user.clips
+  })
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={clips}
+        renderItem={({ item }) => (
+          <ListItem
+            imageUrl={item.urlToImage}
+            title={item.title}
+            author={item.author}
+            onPress={() => navigation.navigate('Article', { article: item })}
+          />
+        )}
+        keyExtractor={(_, index) => index.toString()}
+      />
+    </SafeAreaView>
+  )
+}
