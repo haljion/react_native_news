@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "news",
+    "slug": "news",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.haljion.news"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "newsApiKey": "3f6bcb7e5696483a9e8b047a9fe39249",
+      "eas": {
+        "projectId": "0bf74434-066b-457e-bb74-da14d8f6fc2d"
+      }
+    }
+  }
+}
